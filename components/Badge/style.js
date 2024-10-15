@@ -11,9 +11,9 @@ const style = StyleSheet.create({
   },
   title: {
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 11,
     fontWeight: '500',
-    paddingVertical: 5,
+    paddingVertical: 4,
     color: 'white',
     textAlign: 'center',
   },

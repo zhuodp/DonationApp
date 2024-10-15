@@ -6,7 +6,7 @@ import style from './style';
 const Badge = props => {
   const [width, setWidth] = useState(0);
   const textRef = useRef(null);
-  const horizontalPadding = 15;
+  const horizontalPadding = 10;
   const tabWidth = {
     width: horizontalPadding * 2 + width,
   };
