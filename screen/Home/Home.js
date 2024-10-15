@@ -1,17 +1,15 @@
 import React from 'react';
-import style from './style';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import globalStyle from '../../assets/style/globalStyle';
-import Header from '../../components/Header/Header';
-import Button from '../../components/Button/Button';
-import Tab from '../../components/Tab/Tab';
-import Badge from '../../components/Badge/Badge';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import Search from '../../components/Search/Search';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
+import {useSelector} from 'react-redux';
+import Header from '../../components/Header/Header';
 
 const Home = () => {
+  const user = useSelector(state => state.user);
+  console.log(user);
+
   return (
     <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
       <Search
@@ -19,7 +17,13 @@ const Home = () => {
           console.log(value);
         }}
       />
-      <View style={{flexDirection:'row', justifyContent:'space-around', marginHorizontal: 15}}>
+      <Header type={1} title={user.firstName + user.lastName} />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          marginHorizontal: 15,
+        }}>
         <SingleDonationItem
           uri={
             'https://fastly.picsum.photos/id/1015/200/200.jpg?hmac=CZwBryoFVJo_ic1ivVDBJGVm0MZDhNMiO5B9KzOMY_Y'

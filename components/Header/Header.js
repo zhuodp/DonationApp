@@ -29,7 +29,7 @@ const Header = props => {
 };
 
 Header.default = {
-  title: '',
+  title: '', 
   type: 1,
   color: '#000000',
 };
