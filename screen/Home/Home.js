@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -22,12 +22,33 @@ import Tab from '../../components/Tab/Tab';
 
 const Home = () => {
   const user = useSelector(state => state.user);
+  const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
   dispatch(resetToInitialState());
 
-  const categories = useSelector(state => state.categories);
-  console.log(categories);
-  // console.log(user);
+  const [categoryPage, setCategoryPage] = useState(1);
+  const [categoryList, setCategoryList] = useState([]);
+  const [isCategoryLoading, setIsCategoryLoading] = useState(false);
+  const categoryPageSize = 4;
+
+  useEffect(() => {
+    setIsCategoryLoading(true);
+    setCategoryList(
+      pagination(categories.categories, categoryPage, categoryPageSize),
+    );
+    setCategoryPage(prev => prev + 1);
+    setIsCategoryLoading(false);
+  }, []);
+
+  const pagination = (items, pageNumber, pageSize) => {
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    if (startIndex >= items.length) {
+      return [];
+    } else {
+      return items.slice(startIndex, endIndex);
+    }
+  };
 
   return (
     <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
@@ -70,7 +91,7 @@ const Home = () => {
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            data={categories.categories}
+            data={categoryList}
             renderItem={({item}) => {
               return (
                 <View style={style.categoryItem} key={item.categoryId}>
@@ -86,6 +107,23 @@ const Home = () => {
                   />
                 </View>
               );
+            }}
+            onEndReachedThreshold={0.5}
+            onEndReached={() => {
+              if (isCategoryLoading) {
+                return;
+              }
+              setIsCategoryLoading(true);
+              const nextPageData = pagination(
+                categories.categories,
+                categoryPage,
+                categoryPageSize,
+              );
+              if (nextPageData.length > 0) {
+                setCategoryList(prevState => [...prevState, ...nextPageData]);
+                setCategoryPage(prevState => prevState + 1);
+              }
+              setIsCategoryLoading(false);
             }}
           />
         </View>
