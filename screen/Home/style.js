@@ -22,6 +22,7 @@ const style = StyleSheet.create({
   profileImage: {
     width: 50,
     height: 50,
+    borderRadius: 25,
   },
   searchBox: {
     marginHorizontal: 18,
@@ -35,6 +36,17 @@ const style = StyleSheet.create({
   bannerImageContainer: {
     marginHorizontal: 18,
     marginTop: 10,
+  },
+  categories: {
+    marginLeft: 10,
+  },
+  categoryItem: {
+    marginEnd: 10,
+  },
+  categoryHeader: {
+    marginHorizontal: 18,
+    marginTop: 15,
+    marginBottom: 5,
   },
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  FlatList,
   Image,
   Pressable,
   SafeAreaView,
@@ -13,13 +14,20 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../components/Header/Header';
 import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
+import {
+  resetCategories,
+  updateSelectedCategoryId,
+} from '../../redux/reducers/Categories';
+import Tab from '../../components/Tab/Tab';
 
 const Home = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   dispatch(resetToInitialState());
 
-  console.log(user);
+  const categories = useSelector(state => state.categories);
+  console.log(categories);
+  // console.log(user);
 
   return (
     <SafeAreaView style={[globalStyle.backgroundWhite, globalStyle.flex]}>
@@ -34,7 +42,7 @@ const Home = () => {
           <Image
             source={{uri: user.profileImage}}
             style={style.profileImage}
-            resizeMode={'contain'}
+            resizeMode={'cover'}
           />
         </View>
         <View style={style.searchBox}>
@@ -50,9 +58,37 @@ const Home = () => {
             source={{
               uri: 'https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240',
             }}
-            resizeMode='cover'
+            resizeMode="cover"
           />
         </Pressable>
+
+        <View style={style.categoryHeader}>
+          <Header title={'Select Category'} type={2} />
+        </View>
+
+        <View style={style.categories}>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={categories.categories}
+            renderItem={({item}) => {
+              return (
+                <View style={style.categoryItem} key={item.categoryId}>
+                  <Tab
+                    tabId={item.categoryId}
+                    title={item.name}
+                    isInactive={
+                      item.categoryId !== categories.selectedCategoryId
+                    }
+                    onPress={value => {
+                      dispatch(updateSelectedCategoryId(value));
+                    }}
+                  />
+                </View>
+              );
+            }}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

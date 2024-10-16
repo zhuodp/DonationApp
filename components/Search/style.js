@@ -19,10 +19,6 @@ const style = StyleSheet.create({
     lineHeight: 14,
     color: '#686C7A',
   },
-  bannerImage: {
-    width: '100%',
-    height: 60,
-  },
 });
 
 export default style;
