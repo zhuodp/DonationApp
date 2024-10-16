@@ -16,10 +16,14 @@ import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
 import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 import Tab from '../../components/Tab/Tab';
-import {resetDonations} from '../../redux/reducers/Donations';
+import {
+  resetDonations,
+  updateSelectedDonationId,
+} from '../../redux/reducers/Donations';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
+import {Routes} from '../../navigation/Routes';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const user = useSelector(state => state.user);
   const categories = useSelector(state => state.categories);
   const donations = useSelector(state => state.donations);
@@ -135,7 +139,7 @@ const Home = () => {
           />
         </View>
         {donationItems.length > 0 && (
-          <View style={style.donationItemContainer} >
+          <View style={style.donationItemContainer}>
             {donationItems.map(value => (
               <View key={value.donationItemId} style={style.singleDonationItem}>
                 <SingleDonationItem
@@ -149,8 +153,8 @@ const Home = () => {
                   donationTitle={value.name}
                   uri={value.image}
                   onPress={donationItemId => {
-                    console.log('donation clicked :', donationItemId);
-                    // todo donationItem Press
+                    dispatch(updateSelectedDonationId(donationItemId));
+                    navigation.navigate(Routes.SingleDonationItem);
                   }}
                 />
               </View>

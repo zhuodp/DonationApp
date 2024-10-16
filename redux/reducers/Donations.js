@@ -204,6 +204,7 @@ const initialState = {
     },
   ],
   selectedDonationId: null,
+  selectedDonationInformation: {},
 };
 
 const Donations = createSlice({
@@ -215,10 +216,16 @@ const Donations = createSlice({
     },
     updateSelectedDonationId: (state, action) => {
       state.selectedDonationId = action.payload;
+      state.selectedDonationInformation = state.items.find(
+        item => item.donationItemId === action.payload,
+      );
     },
   },
 });
 
-export const {resetDonations: resetDonations, updateSelectedDonationId: updateSelectedDonationId} = Donations.actions;
+export const {
+  resetDonations: resetDonations,
+  updateSelectedDonationId: updateSelectedDonationId,
+} = Donations.actions;
 
 export default Donations.reducer;
