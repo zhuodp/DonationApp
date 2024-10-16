@@ -22,7 +22,12 @@ const SingleDonationItem = props => {
         />
       </View>
       <View style={style.donationInfo}>
-        <Header title={props.donationTitle} type={3} color={'#0A043C'} />
+        <Header
+          numberOfLines={1}
+          title={props.donationTitle}
+          type={3}
+          color={'#0A043C'}
+        />
         <View style={style.price}>
           <Header
             title={'$' + props.price.toFixed(2)}
@@ -37,7 +42,7 @@ const SingleDonationItem = props => {
 
 SingleDonationItem.defaultProps = {
   onPress: () => {},
-}
+};
 
 SingleDonationItem.propTypes = {
   uri: PropTypes.string.isRequired,

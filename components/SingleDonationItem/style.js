@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const style = StyleSheet.create({
   image: {
-    width: 116,
-    height: 128,
+    width: 110,
+    height: 120,
     borderRadius: 20,
   },
   badge: {
