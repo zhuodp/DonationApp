@@ -14,22 +14,28 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../components/Header/Header';
 import style from './style';
 import {resetToInitialState} from '../../redux/reducers/User';
-import {
-  resetCategories,
-  updateSelectedCategoryId,
-} from '../../redux/reducers/Categories';
+import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 import Tab from '../../components/Tab/Tab';
+import {resetDonations} from '../../redux/reducers/Donations';
 
 const Home = () => {
   const user = useSelector(state => state.user);
   const categories = useSelector(state => state.categories);
+  const donations = useSelector(state => state.donations);
   const dispatch = useDispatch();
-  dispatch(resetToInitialState());
 
   const [categoryPage, setCategoryPage] = useState(1);
   const [categoryList, setCategoryList] = useState([]);
   const [isCategoryLoading, setIsCategoryLoading] = useState(false);
   const categoryPageSize = 4;
+
+  const [donationItems, setDonationItems] = useState([]);
+  useEffect(() => {
+    const filteredItems = donations.items.filter(value =>
+      value.categoryIds.includes(categories.selectedCategoryId),
+    );
+    setDonationItems(filteredItems);
+  }, [categories.selectedCategoryId]);
 
   useEffect(() => {
     setIsCategoryLoading(true);
