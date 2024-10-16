@@ -4,6 +4,7 @@ const style = StyleSheet.create({
   image: {
     width: 116,
     height: 128,
+    borderRadius: 20,
   },
   badge: {
     position: 'absolute',

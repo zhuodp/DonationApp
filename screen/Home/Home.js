@@ -17,6 +17,7 @@ import {resetToInitialState} from '../../redux/reducers/User';
 import {updateSelectedCategoryId} from '../../redux/reducers/Categories';
 import Tab from '../../components/Tab/Tab';
 import {resetDonations} from '../../redux/reducers/Donations';
+import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 
 const Home = () => {
   const user = useSelector(state => state.user);
@@ -133,6 +134,28 @@ const Home = () => {
             }}
           />
         </View>
+        {donationItems.length > 0 && (
+          <View style={style.donationItemContainer}>
+            {donationItems.map(value => (
+              <SingleDonationItem
+                donationItemId={value.donationItemId}
+                price={parseFloat(value.price)}
+                badgeTitle={
+                  categories.categories.filter(
+                    val => val.categoryId === categories.selectedCategoryId,
+                  )[0].name
+                }
+                donationTitle={value.name}
+                uri={value.image}
+                key={value.donationItemId}
+                onPress={donationItemId => {
+                  console.log('donation clicked :', donationItemId);
+                  // todo donationItem Press
+                }}
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
