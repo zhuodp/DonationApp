@@ -26,6 +26,7 @@ const Search = props => {
         size={14}
       />
       <TextInput
+        placeholder={props.placeholder}
         ref={textInputRef}
         style={style.searchInput}
         value={search}
@@ -37,10 +38,12 @@ const Search = props => {
 
 Search.defaultProps = {
   onSearch: () => {},
+  placeholder: 'Search',
 };
 
 Search.propTypes = {
   onSearch: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 export default Search;

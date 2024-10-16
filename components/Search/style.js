@@ -3,12 +3,10 @@ import {StyleSheet} from 'react-native';
 const style = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
-    borderWidth: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F3F5F9',
     borderRadius: 15,
-    borderColor: 'black',
     height: 40,
   },
   searchIcon: {
@@ -21,6 +19,10 @@ const style = StyleSheet.create({
     lineHeight: 14,
     color: '#686C7A',
   },
+  bannerImage: {
+    width: '100%',
+    height: 60,
+  },
 });
 
-export default style ;
+export default style;
