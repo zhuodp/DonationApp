@@ -140,25 +140,31 @@ const Home = ({navigation}) => {
         </View>
         {donationItems.length > 0 && (
           <View style={style.donationItemContainer}>
-            {donationItems.map(value => (
-              <View key={value.donationItemId} style={style.singleDonationItem}>
-                <SingleDonationItem
-                  donationItemId={value.donationItemId}
-                  price={parseFloat(value.price)}
-                  badgeTitle={
-                    categories.categories.filter(
-                      val => val.categoryId === categories.selectedCategoryId,
-                    )[0].name
-                  }
-                  donationTitle={value.name}
-                  uri={value.image}
-                  onPress={donationItemId => {
-                    dispatch(updateSelectedDonationId(donationItemId));
-                    navigation.navigate(Routes.SingleDonationItem);
-                  }}
-                />
-              </View>
-            ))}
+            {donationItems.map(value => {
+              const categoryInfo = categories.categories.find(
+                val => val.categoryId === categories.selectedCategoryId,
+              );
+
+              return (
+                <View
+                  key={value.donationItemId}
+                  style={style.singleDonationItem}>
+                  <SingleDonationItem
+                    donationItemId={value.donationItemId}
+                    price={parseFloat(value.price)}
+                    badgeTitle={categoryInfo.name}
+                    donationTitle={value.name}
+                    uri={value.image}
+                    onPress={donationItemId => {
+                      dispatch(updateSelectedDonationId(donationItemId));
+                      navigation.navigate(Routes.SingleDonationItem, {
+                        categoryInfo,
+                      });
+                    }}
+                  />
+                </View>
+              );
+            })}
           </View>
         )}
       </ScrollView>
