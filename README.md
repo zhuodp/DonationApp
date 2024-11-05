@@ -4,7 +4,7 @@
 
 # 项目简介
 
-Udemy 中的 RN 教学课程的个人练习项目, 实现一个 **物品捐赠 APP**
+Udemy 中的 RN 教学课程的个人学习项目, 实现一个 **物品捐赠 APP**
 
 React Native: Mobile App Development (CLI) [2024]
 
